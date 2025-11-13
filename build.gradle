@@ -1,0 +1,59 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.7'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+    mavenCentral()
+    // dcm4che 라이브러리 전용 저장소 (필수)
+    maven { url "https://www.dcm4che.org/maven2/" }
+}
+
+// dcm4che 버전을 변수로 관리 (일관성 유지)
+ext {
+    dcm4cheVersion = '5.30.0'
+}
+
+dependencies {
+
+    implementation 'org.dcm4che:dcm4che-core:5.30.0'
+    implementation 'org.dcm4che:dcm4che-imageio:5.30.0'
+    implementation 'org.dcm4che:dcm4che-imageio-opencv:5.30.0'
+    implementation 'org.dcm4che.tool:dcm4che-tool-common:5.30.0'
+    implementation 'org.dcm4che:dcm4che-imageio-rle:5.30.0'
+    implementation 'org.dcm4che:opencv:5.30.0'
+    implementation 'org.slf4j:slf4j-api'
+    runtimeOnly 'org.dcm4che:opencv-native-windows-x86_64:5.30.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-quartz'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'com.github.jai-imageio:jai-imageio-core:1.4.0'
+    implementation 'com.github.jai-imageio:jai-imageio-jpeg2000:1.4.0'
+    implementation 'org.dcm4che:dcm4che-imageio-native:5.30.0:windows-x86_64'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
