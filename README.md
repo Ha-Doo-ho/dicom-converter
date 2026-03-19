@@ -15,6 +15,7 @@
 
 ## 주요 API 명세
 |HTTP Method | Endpoint | 설명 |
+|---|---|---|
 | `POST` | `/api/dicom/upload` | DICOM 파일 업로드 및 메타데이터 추출/저장 |
 | `POST` | `/api/dicom/convert/{id}` | 업로드된 DICOM 파일을 PNG로 변환 |
 | `GET` | `/api/dicom/history` | 전체 파일 업로드 및 변환 이력 조회 |
